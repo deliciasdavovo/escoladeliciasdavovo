@@ -412,6 +412,40 @@ button, a, input, select {touch-action: manipulation;}
 }
 
 
+
+/* Guia de etapas com iconografia linear — livro, prática e conferência */
+.learning-steps {
+ display:grid;
+ grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr) 26px minmax(0,1fr);
+ align-items:center;gap:0; padding:6px 0 18px;
+ border-bottom:1px solid #e6eae3;
+}
+.learning-step {
+ appearance:none;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:6px;padding:12px 4px 9px;min-width:0;min-height:74px;
+ border:0;border-bottom:2px solid transparent;border-radius:10px 10px 0 0;
+ background:transparent;color:#637568;font-size:12px;font-weight:700;
+ line-height:1.2;white-space:nowrap;transition:background .15s,color .15s;
+}
+.learning-step svg {display:block;width:24px;height:24px;flex-shrink:0;}
+.learning-step .step-name {display:block;}
+.learning-step:hover {background:#f3f6f1;color:#24543d;}
+.learning-step.active,.learning-step.done.active {background:#edf4eb;color:#20553b;border-bottom-color:#20553b;}
+.learning-step.done:not(.active) {background:transparent;color:#47765b;border-bottom-color:transparent;}
+.step-arrow {display:flex;align-items:center;justify-content:center;align-self:center;pointer-events:none;color:#9ca99e;padding-bottom:18px;}
+.step-arrow svg {width:15px;height:15px;display:block;}
+@media(max-width:600px) {
+ .learning-steps {grid-template-columns:minmax(0,1fr) 19px minmax(0,1fr) 19px minmax(0,1fr);gap:0;padding:2px 0 12px;}
+ .learning-step {font-size:11px;min-height:73px;min-width:0;padding:10px 2px 8px;gap:7px;border-radius:9px 9px 0 0;}
+ .learning-step svg {width:21px;height:21px;}
+ .step-arrow {padding-bottom:15px;}
+ .step-arrow svg {width:13px;height:13px;}
+}
+@media(max-width:350px) {
+ .learning-steps {grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr);}
+ .learning-step {font-size:10.5px;}
+}
+
 </style>
 </head>
 <body>
@@ -594,10 +628,18 @@ function renderModal(){
  const c=currentCourse,l=c.lessons[currentLesson],key=trainingKey(),done=Boolean(checked[key]);
  document.getElementById('modalHead').innerHTML=`<div class="modal-label">${c.category} · ${c.time} minutos · ${complete(c)} de ${c.lessons.length} aulas concluídas</div><h2 id="modalTitle">${c.name}</h2><p>${c.summary}</p><div class="modal-head-stats"><span>3 etapas por aula</span><span>Exemplos práticos</span><span>Revisão rápida</span></div>`;
  const nav=`<aside class="lesson-nav"><h4>Aulas do treinamento</h4><div class="lesson-links">${c.lessons.map((x,i)=>`<button class="lesson-button ${currentLesson===i?'active':''}" data-lesson="${i}"><span class="lesson-dot ${checked[c.id+'-'+i]?'done':''}">${checked[c.id+'-'+i]?'✓':i+1}</span><span>${x.title}</span></button>`).join('')}</div><div class="lesson-nav-note">Aprenda o procedimento, revise o checklist e responda à pergunta final. Os conteúdos ainda são exemplos a serem validados pela gestão.</div></aside>`;
- let stageHeader=`<div class="learning-steps" aria-label="Etapas desta aula">
- <button type="button" class="learning-step ${currentStage===0?'active':''} ${done?'done':''}" data-stage="0">① Entender</button>
- <button type="button" class="learning-step ${currentStage===1?'active':''} ${done?'done':''}" data-stage="1">② Praticar</button>
- <button type="button" class="learning-step ${currentStage>=2?'active':''} ${done?'done':''}" data-stage="2">③ Conferir</button></div>`;
+ let stageHeader=`<div class="learning-steps" role="group" aria-label="Etapas desta aula">
+ <button type="button" class="learning-step ${currentStage===0?'active':''} ${done?'done':''}" data-stage="0" aria-current="${currentStage===0?'step':'false'}" aria-label="Etapa 1: Entender">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-2.2-1.5-5.1-1.7-8-1.1v12c3-.7 5.7-.3 8 1.1m0-12c2.2-1.5 5.1-1.7 8-1.1v12c-3-.7-5.7-.3-8 1.1m0-12v12"/></svg>
+ <span class="step-name">Entender</span></button>
+ <span class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span>
+ <button type="button" class="learning-step ${currentStage===1?'active':''} ${done?'done':''}" data-stage="1" aria-current="${currentStage===1?'step':'false'}" aria-label="Etapa 2: Praticar">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="2.4"/><path d="m8.2 12 2.8 2.8 5-5.4"/></svg>
+ <span class="step-name">Praticar</span></button>
+ <span class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></span>
+ <button type="button" class="learning-step ${currentStage>=2?'active':''} ${done?'done':''}" data-stage="2" aria-current="${currentStage>=2?'step':'false'}" aria-label="Etapa 3: Conferir">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.3"/><path d="m8.2 12 2.5 2.7 5.1-5.4"/></svg>
+ <span class="step-name">Conferir</span></button></div>`;
  let content='';
  if(currentStage===0){
   content=`<div class="learning-stage"><span class="lesson-kicker">AULA ${currentLesson+1} DE ${c.lessons.length} · ETAPA 01</span><h3>${l.title}</h3><p>${l.text}</p>
