@@ -244,6 +244,47 @@ main{max-width:1510px;margin:auto}
 @media (max-width:640px){.method-grid{grid-template-columns:1fr}.method-item{min-height:0}.method-item .method-icon{margin:10px 0}.featured{flex-direction:column;align-items:flex-start}.featured button{width:100%;text-align:left}.modal{max-height:none;height:100vh;width:100%;border-radius:0}.modal-backdrop{padding:0}.modal-body{display:block}.lesson-nav{border-bottom:1px solid #e8e9e1;border-right:0;padding:14px 18px}.lesson-nav h4,.lesson-nav-note{display:none}.lesson-nav .lesson-links{display:flex;gap:8px;overflow-x:auto;padding-bottom:5px}.lesson-button{white-space:nowrap;width:auto;min-width:150px;margin:0;font-size:10px}.lesson-content{padding:24px 20px 45px}.modal-head{padding:35px 24px 26px}.modal h2{font-size:27px}.learning-step{font-size:10px;gap:4px}.learning-visual{padding:12px}.learning-visual .visual-figure{width:95px;height:88px;flex-basis:95px}.progress-wrap{padding:27px 23px}.hero h1{font-size:40px}.hero-inner{padding:52px 21px 60px}}
 @media (prefers-reduced-motion:reduce){.learning-stage,.poster-svg,.progress-fill,.hero-btn{transition:none!important;animation:none!important}}
 
+
+/* Ajustes de legibilidade e cantos arredondados — 26/10/2026 */
+.hero p {font-size:16px;line-height:1.85}
+.progress-intro {font-size:14px;line-height:1.75}
+.progress-foot {font-size:12px}
+.section-head p {font-size:14px;line-height:1.65}
+.course .card-description {font-size:15px;line-height:1.65}
+.card-info {font-size:12.5px}
+.card-progress {font-size:12.5px}
+.featured p {font-size:14px;line-height:1.75}
+.guide p {font-size:14px;line-height:1.75}
+.lesson-content p {font-size:15px;line-height:1.85}
+.modal-head p {font-size:15px;line-height:1.8}
+.lesson-button {font-size:14px;line-height:1.5}
+.lesson-nav-note {font-size:12px}
+.learning-visual .visual-copy span {font-size:14px;line-height:1.7}
+.lesson-points li {font-size:14px;line-height:1.7;padding-left:45px}
+.task-check {font-size:14px;line-height:1.7}
+.task-hint {font-size:12.5px}
+.quiz-option {font-size:14px;line-height:1.7}
+.quiz-feedback {font-size:14px;line-height:1.7}
+.practice-callout {font-size:14px;line-height:1.75}
+.helper-note {font-size:12px;line-height:1.7}
+.step-bottom .helper {font-size:12px}
+.training-done p {font-size:15px}
+.action, .hero-btn, .featured button, .guide button, .progress-next button,
+.user-pill, .icon-button, .modal-close, .learning-step, .sort, .chip {
+ border-radius:12px;
+}
+.chip {border:1px solid #e2e8dd;background:#fff;padding:9px 14px;margin-right:3px;font-size:12px}
+.chip.on {background:#e6f0e7;color:#205039;border:1px solid #b6d4c1}
+.chip:hover {background:#f3f8f3}
+.searchbox {border-radius:12px}
+.action, .hero-btn, .featured button, .guide button {font-size:13px}
+.featured {margin-top:54px}
+@media(max-width:640px) {
+ .hero p{font-size:15px}
+ .lesson-button {font-size:12px}
+ .course .card-description {font-size:14px}
+ .chip{font-size:11.5px;padding:8px 12px;margin-right:4px}
+}
 </style>
 </head>
 <body>
@@ -253,7 +294,7 @@ main{max-width:1510px;margin:auto}
  <div class="header-right"><button class="user-pill" id="resetBtn" title="Limpar progresso salvo neste navegador">↻ Reiniciar demo</button></div>
 </header>
 <nav class="nav" aria-label="Navegação principal">
- <a href="#como-funciona">Como funciona</a><a class="current" href="#treinamentos">Treinamentos</a><a href="#padroes">Padrões da casa</a><a href="#minha-trilha">Minha trilha</a>
+ <a class="current" href="#treinamentos">Treinamentos</a><a href="#padroes">Padrões da casa</a><a href="#minha-trilha">Minha trilha</a>
 </nav>
 <section class="hero" id="minha-trilha">
  <div class="hero-inner">
@@ -274,14 +315,6 @@ main{max-width:1510px;margin:auto}
  </div>
 </section>
 <main>
-<section class="method" id="como-funciona">
- <div class="method-head"><div class="small-tag">UM JEITO MAIS SIMPLES DE APRENDER</div><h2>Não basta ler. <span>É preciso saber fazer.</span></h2><p>Todos os treinamentos seguem o mesmo caminho, para ninguém ficar perdido.</p></div>
- <div class="method-grid">
-  <div class="method-item"><div class="method-num">01 <span aria-hidden="true">↗</span></div><div class="method-icon">✳</div><h3>Entenda o padrão</h3><p>Uma explicação clara, com o que fazer e por quê. Sem longos manuais.</p></div>
-  <div class="method-item"><div class="method-num">02 <span aria-hidden="true">↗</span></div><div class="method-icon">☑</div><h3>Coloque em prática</h3><p>Revise um checklist e pratique com o responsável do setor.</p></div>
-  <div class="method-item"><div class="method-num">03 <span aria-hidden="true">✓</span></div><div class="method-icon">?</div><h3>Confira o aprendizado</h3><p>Responda a uma situação rápida e avance para a próxima aula.</p></div>
- </div>
-</section>
 <section class="featured">
  <div><div class="small-tag">PRIMEIRO TREINAMENTO RECOMENDADO</div><h3>Comece conhecendo a nossa casa.</h3><p>História, cultura, comunicação e o jeito Delícias da Vovó de trabalhar.</p></div>
  <button type="button" onclick="openCourse('welcome')">Começar boas-vindas <span>↗</span></button>
