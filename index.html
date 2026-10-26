@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#fcfbf8" />
+<title>Escola da Casa | Delícias da Vovó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Newsreader:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {--ink:#25362e;--forest:#275344;--forest2:#416e56;--orange:#c46c46;--sage:#d9e4d5;--cream:#fcfbf8;--line:#e9e9e2;--muted:#748176;--light:#f4f3ec;--shadow:0 20px 70px rgba(31,56,43,.12)}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {margin:0;background:var(--cream);font-family:"DM Sans",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+button,input,select {font:inherit}
+button {cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible {outline:3px solid #9cbbab;outline-offset:3px}
+.top {height:77px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 clamp(18px,3.2vw,52px);border-bottom:1px solid var(--line);background:#fff}
+.top .brand {font-family:"Newsreader",Georgia,serif;font-weight:700;letter-spacing:-.065em;font-size:clamp(21px,2.2vw,29px);color:var(--forest);line-height:1}
+.brand em {font-size:.55em;letter-spacing:.04em;display:block;font-style:normal;text-align:center;font-family:"DM Sans",sans-serif;font-weight:800;margin-top:8px}
+.header-left,.header-right{display:flex;align-items:center;gap:20px}
+.header-right {justify-content:flex-end}
+.icon-button {background:transparent;border:0;width:36px;height:36px;padding:8px;display:grid;place-items:center;color:var(--ink);border-radius:50%}
+.icon-button:hover {background:var(--light)}
+.small-tag {font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.user-pill {border:1px solid var(--line);border-radius:30px;padding:9px 14px;font-size:12px;background:white;font-weight:700}
+.nav {height:56px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:42px;background:#fff}
+.nav a{font-size:13px;text-decoration:none;color:var(--ink);font-weight:600;position:relative;padding:18px 0}
+.nav a.current:after {content:"";position:absolute;bottom:10px;left:0;right:0;height:2px;background:var(--forest)}
+.nav a:hover {color:var(--forest2)}
+main {max-width:1510px;margin:auto;padding:0 clamp(20px,3.4vw,54px) 100px}
+.hero {display:grid;grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);gap:30px;align-items:center;padding:64px 0 52px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.2em;color:var(--orange);display:flex;gap:10px;align-items:center}
+.eyebrow:before{content:"";width:27px;height:1px;background:var(--orange)}
+.hero h1{font-family:"Newsreader",Georgia,serif;font-size:clamp(40px,5vw,66px);font-weight:600;letter-spacing:-.065em;line-height:1.1;margin:17px 0 18px;color:#244c3b}
+.hero h1 em {font-weight:600;font-style:italic;color:var(--orange)}
+.hero p{max-width:510px;font-size:15px;line-height:1.75;color:#68766c;margin:0}
+.progress-wrap{justify-self:end;width:min(100%,398px);background:#f1f2e9;padding:25px 30px 24px;box-shadow:0 3px 0 #e9ede2;border:1px solid #e7eade}
+.progress-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.progress-wrap h3{font-family:"Newsreader",Georgia,serif;font-size:23px;letter-spacing:-.025em;margin:16px 0 10px;font-weight:600}
+.progress-bar{height:7px;border-radius:50px;background:#d8dfd4;overflow:hidden;margin:16px 0 10px}
+.progress-fill{height:100%;width:0;background:var(--forest);transition:width .35s}
+.progress-foot{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#67796d}
+.progress-accent{color:var(--orange);font-weight:800;font-size:20px}
+.section-head {display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin:44px 0 23px}
+.section-head h2{font-family:"Newsreader",Georgia,serif;letter-spacing:-.055em;font-size:clamp(27px,3vw,35px);font-weight:600;margin:7px 0 0}
+.section-head p {font-size:13px;color:#869087;max-width:280px;text-align:right;line-height:1.5}
+.filterbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.filter-left,.filter-right {display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.chip{border:1px solid transparent;background:transparent;color:#657267;border-radius:0;padding:8px 4px;margin-right:17px;font-size:12px;font-weight:700;white-space:nowrap}
+.chip:hover{color:var(--forest)}
+.chip.on {color:var(--forest);border-bottom:2px solid var(--forest)}
+.searchbox {display:flex;align-items:center;border:1px solid #e4e7e0;padding:8px 13px;gap:9px;color:#849186;background:#fff;min-width:230px}
+.searchbox input{border:0;outline:0;background:transparent;width:170px;min-width:70px;color:var(--ink);font-size:12px}
+.sort{border:0;background:transparent;font-size:12px;font-weight:700;color:var(--ink);padding:8px}
+.tiny-count {font-size:11px;color:var(--muted)}
+.cards {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:35px 22px;padding-top:29px}
+.course {min-width:0;display:flex;flex-direction:column}
+.poster {width:100%;aspect-ratio:1/.98;position:relative;overflow:hidden;background:var(--bg,#e9efe6);display:flex;align-items:flex-end;justify-content:center;border:0;isolation:isolate;padding:0}
+.poster:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(24,55,38,.035);pointer-events:none}
+.poster::before{content:"";position:absolute;right:-20%;bottom:-48%;height:88%;aspect-ratio:1;border:2px solid rgba(43,77,57,.12);border-radius:50%;transform:rotate(-22deg)}
+.poster-title {position:absolute;z-index:3;top:24px;left:22px;right:14px;font-family:"Newsreader",Georgia,serif;font-size:clamp(24px,2.1vw,32px);font-weight:600;line-height:1.04;color:var(--foreground,#25583f);text-align:left;letter-spacing:-.07em;max-width:75%}
+.poster-svg{display:block;width:82%;height:75%;z-index:2;transform:translate(10%,5%);transition:transform .3s ease}
+.poster:hover .poster-svg{transform:translate(10%,1%) scale(1.035)}
+.poster-badge{position:absolute;z-index:5;right:11px;top:18px;border-radius:50%;background:#253a2f;color:#fff;font-size:9px;text-align:center;width:59px;height:59px;display:grid;place-items:center;font-weight:800;line-height:1.2;transform:rotate(13deg);letter-spacing:.03em}
+.card-description {font-size:13px;line-height:1.5;margin:18px 0 0;min-height:36px;font-weight:700;color:var(--ink)}
+.card-info {color:#7c887c;font-size:11.5px;margin-top:9px;display:flex;gap:8px;align-items:center}
+.card-info span+span:before{content:"·";margin-right:8px;color:#c0c8bc}
+.card-footer {display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:16px}
+.card-progress {font-size:12px;color:var(--forest);font-weight:800}
+.card-progress.none {color:#9b9c93}
+.action {border:0;background:var(--forest);color:#fff;padding:11px 20px;font-size:12px;font-weight:800;min-width:112px}
+.action:hover {background:#173a2b}
+.action.secondary {color:var(--forest);background:#e6ede3}
+.empty {padding:70px 0;text-align:center;color:var(--muted)}
+.guides {margin-top:84px;display:grid;grid-template-columns:1fr 1fr;gap:23px}
+.guide {background:#f4f1e8;padding:28px 32px;min-height:185px;display:flex;align-items:center;justify-content:space-between;gap:25px;border:1px solid #efebdf}
+.guide:nth-child(2){background:#eaf0e8;border-color:#e0e8dd}
+.guide h3 {font-family:"Newsreader",Georgia,serif;font-size:25px;letter-spacing:-.045em;margin:10px 0}
+.guide p {font-size:12px;line-height:1.65;color:#697970;max-width:400px;margin:0}
+.guide button{white-space:nowrap;padding:12px 17px;color:var(--forest);background:transparent;border:1px solid #a7b9ad;font-weight:800;font-size:11px}
+.footer{border-top:1px solid var(--line);padding:25px 5vw;display:flex;align-items:center;justify-content:space-between;background:#fff;font-size:11px;color:#899489;gap:18px}
+.footer strong{color:var(--forest);font-family:"Newsreader",Georgia,serif;font-size:16px}
+.modal-backdrop{position:fixed;inset:0;z-index:20;background:rgba(22,43,32,.48);display:none;align-items:center;justify-content:center;padding:16px}
+.modal-backdrop.open{display:flex}
+.modal{background:#fff;max-height:min(90vh,850px);overflow-y:auto;width:min(950px,100%);box-shadow:var(--shadow);position:relative}
+.modal-close{position:absolute;top:15px;right:15px;border:0;background:#fff;width:36px;height:36px;display:grid;place-items:center;z-index:2;border-radius:50%;font-size:24px}
+.modal-head{background:#edf1e9;padding:35px 45px 30px}
+.modal-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.modal h2{font-family:"Newsreader",Georgia,serif;font-size:clamp(28px,4vw,43px);letter-spacing:-.055em;line-height:1.12;color:var(--forest);margin:10px 0 10px}
+.modal-head p{font-size:13px;color:#627268;line-height:1.65;max-width:660px}
+.modal-body{display:grid;grid-template-columns:285px 1fr;min-height:300px}
+.lesson-nav{border-right:1px solid var(--line);padding:28px 20px;background:#fbfbf8}
+.lesson-nav h4 {font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin:0 0 17px 5px}
+.lesson-button{border:0;background:transparent;width:100%;text-align:left;padding:12px;display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.45;color:var(--ink);border-radius:2px;margin-bottom:4px}
+.lesson-button:hover{background:#f1f3eb}
+.lesson-button.active{background:#e6ede2;font-weight:800}
+.lesson-dot{border:1px solid #a7b8a8;width:21px;height:21px;flex:0 0 21px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800}
+.lesson-dot.done{background:var(--forest);color:white;border-color:var(--forest)}
+.lesson-content{padding:30px 38px 34px}
+.lesson-kicker{color:var(--orange);font-weight:800;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.lesson-content h3{font-family:"Newsreader",Georgia,serif;font-size:25px;letter-spacing:-.035em;margin:12px 0}
+.lesson-content p{font-size:13px;line-height:1.82;color:#526258}
+.lesson-list {background:#f7f6f0;padding:20px 22px;margin:20px 0 23px}
+.lesson-list h4{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--forest);margin:0 0 13px}
+.lesson-list ul{margin:0;padding-left:18px;font-size:12px;line-height:1.85;color:#526358}
+.lesson-navbuttons {display:flex;justify-content:space-between;gap:12px;margin-top:18px}
+.helper-note{background:#fff9ef;border-left:3px solid #c79161;padding:11px 14px;font-size:11px;color:#7a6d59;line-height:1.55;margin-top:20px}
+.notice {position:fixed;right:23px;bottom:23px;background:var(--forest);color:white;font-size:12px;padding:13px 18px;z-index:40;box-shadow:0 10px 30px #0002;display:none}
+.notice.on {display:block}
+.checkbox-line{display:flex;gap:8px;align-items:center;color:#69796e;font-size:12px}
+.checkbox-line input{accent-color:var(--forest)}
+.hamburger {display:none}
+@media(max-width:1050px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}.poster-title{font-size:27px}.hero{grid-template-columns:1.1fr .9fr}.guide{padding:25px}}
+@media(max-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 18px}.hero{padding:45px 0 36px;grid-template-columns:1fr}.progress-wrap{justify-self:stretch;width:100%}.nav{gap:22px}.filterbar{align-items:flex-start;flex-direction:column}.filter-right{width:100%}.searchbox{flex:1}.searchbox input{width:100%}.guides{grid-template-columns:1fr}.section-head{margin-top:35px}.poster-title{font-size:clamp(25px,4vw,35px)}}
+@media(max-width:540px){.top{height:65px;padding:0 15px}.header-left .small-tag{display:none}.user-pill{font-size:10px;padding:8px}.nav{height:48px;gap:20px;overflow-x:auto;justify-content:flex-start;padding:0 15px}.nav a{white-space:nowrap;font-size:12px}.hero h1{font-size:40px}.hero p{font-size:13px}.cards{gap:26px 12px}.poster-title{font-size:22px;left:13px;top:14px}.poster-badge{width:44px;height:44px;font-size:7px;right:7px;top:7px}.card-description{font-size:12px;min-height:55px}.card-info{font-size:10px;flex-wrap:wrap}.card-footer{align-items:stretch;flex-direction:column;gap:7px}.action{width:100%}.filter-left{gap:0}.chip{font-size:11px;margin-right:11px}.guide{flex-direction:column;align-items:flex-start;min-height:0}.section-head p{display:none}.modal-backdrop{padding:0}.modal{width:100%;height:100%;max-height:none}.modal-head{padding:40px 23px 24px}.modal-body{grid-template-columns:1fr}.lesson-nav{border-right:0;border-bottom:1px solid var(--line);padding:17px 15px}.lesson-nav h4{margin-bottom:8px}.lesson-button{padding:8px}.lesson-content{padding:24px 23px}.footer{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="header-left"><span class="small-tag">Academia interna</span></div>
+ <div class="brand">delícias da vovó<em>ESCOLA DA CASA</em></div>
+ <div class="header-right"><button class="user-pill" id="resetBtn" title="Limpar progresso salvo neste navegador">↻ Reiniciar demo</button></div>
+</header>
+<nav class="nav" aria-label="Navegação principal">
+ <a class="current" href="#treinamentos">Treinamentos</a><a href="#padroes">Padrões da casa</a><a href="#minha-trilha">Minha trilha</a><a href="#padroes">Para gestores</a>
+</nav>
+<main>
+<section class="hero" id="minha-trilha">
+ <div><div class="eyebrow">Aprender para fazer melhor</div>
+ <h1>O nosso jeito<br>de fazer <em>bem-feito.</em></h1>
+ <p>Um lugar para aprender, consultar e manter os padrões da Delícias da Vovó. Do primeiro dia à rotina mais movimentada: todo mundo na mesma página.</p></div>
+ <div class="progress-wrap">
+  <div class="progress-top"><span class="small-tag">Minha trilha de aprendizagem</span><span class="progress-accent" id="percent">0%</span></div>
+  <h3>Cada detalhe conta.</h3><div style="font-size:12px;color:#6e7c72">Acompanhe os treinamentos concluídos neste navegador.</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-foot"><span id="completedCount">0 de 0 etapas concluídas</span><span id="courseCount">0 cursos</span></div>
+ </div>
+</section>
+<section id="treinamentos">
+ <div class="section-head"><div><div class="small-tag">Biblioteca de aprendizagem</div><h2>Treinamentos da equipe</h2></div><p>Conteúdo separado por assunto, para consultar sempre que precisar.</p></div>
+ <div class="filterbar"><div class="filter-left" id="filters" aria-label="Filtros por área"></div>
+  <div class="filter-right"><label class="checkbox-line"><input id="pendingOnly" type="checkbox"> Só não concluídos</label>
+   <label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar treinamento..." aria-label="Buscar treinamento"></label>
+   <select id="sort" class="sort" aria-label="Ordenar cursos"><option value="default">Ordenar: trilha</option><option value="az">Nome (A–Z)</option><option value="duration">Menor duração</option></select>
+  </div>
+ </div>
+ <div class="cards" id="cards"></div><div id="empty" class="empty" style="display:none">Não encontramos treinamentos com esses filtros.</div>
+</section>
+<section class="guides" id="padroes">
+ <div class="guide"><div><div class="small-tag">Consulta rápida</div><h3>Padrões da casa</h3><p>Um índice para os procedimentos operacionais, checklists, fichas e materiais de apoio usados pela equipe.</p></div><button onclick="showInfo('padroes')">Explorar padrões ↗</button></div>
+ <div class="guide"><div><div class="small-tag">Gestão e acompanhamento</div><h3>Treinar, acompanhar, melhorar.</h3><p>Um próximo passo para gestores: responsáveis por setor, avaliações, versões dos procedimentos e resultados por colaborador.</p></div><button onclick="showInfo('gestao')">Ver proposta ↗</button></div>
+</section>
+</main>
+<footer class="footer"><strong>delícias da vovó</strong><span>Escola da Casa · Protótipo interno de treinamentos</span><span>Feito com carinho, aprendido em equipe.</span></footer>
+<div class="modal-backdrop" id="modal" role="presentation" onclick="if(event.target===this)closeModal()"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" aria-label="Fechar" onclick="closeModal()">×</button><div class="modal-head" id="modalHead"></div><div class="modal-body" id="modalBody"></div></div></div>
+<div class="notice" id="notice" role="status"></div>
+<script>
+const icons={
+ welcome:`<rect x="61" y="112" width="172" height="124" rx="3" fill="#f3c79c"/><rect x="74" y="126" width="146" height="110" fill="#fff7ec"/><path d="M45 111 L78 73 H220 L250 111 Z" fill="#d56f45"/><path d="M44 111h208v24q-16 28-35 0-20 28-38 0-20 28-40 0-20 28-40 0-20 28-39 0-17 28-16 0z" fill="#f7e9d2"/><rect x="97" y="163" width="45" height="73" fill="#84a48e"/><rect x="157" y="160" width="46" height="42" fill="#bcd1c1"/><path d="M62 236h177 M115 91v-20 M181 91V71" stroke="#285340"/><path d="m248 84 12-16m-9 42 20-8m-213-17-15-14" stroke="#d56f45" stroke-width="5"/>`,
+ service:`<ellipse cx="150" cy="245" rx="112" ry="14" fill="#d4decf"/><path d="M97 226l8-73q6-36 44-35c40 0 48 34 52 60l7 50" fill="#da8155"/><circle cx="151" cy="85" r="38" fill="#e8bba0"/><path d="M117 81q-8-51 41-49c28-3 43 24 30 56q-9-27-24-31c-16 18-35 20-47 24z" fill="#2f5847"/><path d="M100 154q-37 9-42 37l-8 21m150-57q34 15 47 40" fill="none" stroke="#2c5546" stroke-width="17" stroke-linecap="round"/><path d="M63 190h160l-14 24H79z" fill="#f1c992" stroke="#2f5847" stroke-width="3"/><path d="M113 189q18-44 35-29 17-20 36 29" fill="#f8eddd"/><path d="m135 86-12 3m47-3 11 3" stroke="#285340" stroke-width="3"/><path d="M113 235h82" stroke="#285340" stroke-width="4"/>`,
+ griddle:`<path d="M47 188q0-49 94-49h16q91 0 91 49c0 40-44 67-100 67s-101-29-101-67z" fill="#e8a26a" stroke="#285340" stroke-width="5"/><ellipse cx="148" cy="180" rx="98" ry="35" fill="#294b3d"/><ellipse cx="148" cy="176" rx="82" ry="24" fill="#f8eac5"/><path d="M88 170q24-21 53-4m13 3q37-22 64 4" fill="none" stroke="#d36f43" stroke-width="12" stroke-linecap="round"/><circle cx="107" cy="181" r="9" fill="#799a65"/><circle cx="168" cy="166" r="9" fill="#799a65"/><path d="M233 199l53 12-3 16-62-7" fill="#cf754c" stroke="#285340" stroke-width="3"/><path d="M87 135q-14-24 2-40M140 126q-12-25 3-41m49 48q-11-22 3-41" fill="none" stroke="#c67c51" stroke-width="5" stroke-linecap="round"/>`,
+ coffee:`<path d="M74 143h131v58q-3 49-65 49c-45 0-66-25-66-55z" fill="#efe4ce" stroke="#2d6047" stroke-width="5"/><path d="M202 157q66-16 53 27-3 22-55 23" fill="none" stroke="#2d6047" stroke-width="13"/><path d="M83 169h114" stroke="#d17a4d" stroke-width="9"/><path d="M119 115q-21-22-5-45m39 45q-20-23-4-49m41 50q-20-29-3-47" fill="none" stroke="#ce7650" stroke-width="7" stroke-linecap="round"/><ellipse cx="140" cy="253" rx="93" ry="8" fill="#779980"/><path d="M91 184q48 31 95 0" fill="none" stroke="#c27b5a" stroke-width="5"/>`,
+ display:`<rect x="45" y="95" width="215" height="133" rx="3" fill="#f2dfbf" stroke="#2c5b47" stroke-width="5"/><path d="M45 135h215M42 224h221M71 222v28m165-28v28" stroke="#2c5b47" stroke-width="5"/><path d="M69 180q10-42 38-9 25-38 45 6" fill="#d98659" stroke="#2c5b47" stroke-width="3"/><path d="M163 186q19-49 43-10 24-37 39 8" fill="#e9b569" stroke="#2c5b47" stroke-width="3"/><path d="M76 124h22m20 0h20m18 0h22m20 0h27" stroke="#ca7850" stroke-width="4"/><path d="M56 75l14-14m26 6-2-21m152 29 13-15" stroke="#d87c51" stroke-width="5"/>`,
+ rush:`<circle cx="150" cy="139" r="86" fill="#f5e7c8" stroke="#285340" stroke-width="7"/><path d="M150 75v65l41 29" stroke="#ce724e" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M150 59v-8m0 179v-8m-82-82h-8m180 0h-8" stroke="#285340" stroke-width="5"/><path d="M66 232h57v25H66zm114-4h57v30h-57z" fill="#ce8058"/><path d="M82 244h24m92-2h22" stroke="#fbecda" stroke-width="4"/><path d="M59 67 35 55m225 0 18-17M43 158l-23 5" stroke="#c8734b" stroke-width="6" stroke-linecap="round"/>`,
+ orders:`<rect x="73" y="91" width="147" height="160" fill="#e9c997" stroke="#2c5547" stroke-width="5"/><path d="M73 135l73 36 74-36m-74 36v80" stroke="#2c5547" stroke-width="5" fill="none"/><path d="M73 91l73 36 74-36m-74 36v45" stroke="#2c5547" stroke-width="5" fill="none"/><rect x="115" y="77" width="68" height="28" fill="#d47753" transform="rotate(-13 149 91)"/><path d="M108 209l15 14 29-30" fill="none" stroke="#49775a" stroke-width="10" stroke-linecap="round"/><path d="m225 70 13-18m3 52 20-9M65 68 51 54" stroke="#c87e50" stroke-width="6"/>`,
+ hygiene:`<path d="M100 234q-34-27-37-62V97q0-10 11-10 12 0 12 10v45-72q0-12 11-12 13 0 13 12v65-82q0-12 12-12t12 12v83-65q0-12 13-12t12 12v72q31-43 49-28 9 10-5 29l-39 66-13 23z" fill="#eccba7" stroke="#2d5b45" stroke-width="5" stroke-linejoin="round"/><path d="m220 91 8-29 8 29 28 9-28 10-8 29-8-29-28-10z" fill="#d97e56"/><circle cx="201" cy="183" r="10" fill="#91b49b"/><path d="m49 85 8-22m7 43-23-4" stroke="#cf7a55" stroke-width="5"/>`,
+ register:`<rect x="52" y="80" width="190" height="133" rx="8" fill="#eddbc0" stroke="#2c5946" stroke-width="6"/><rect x="72" y="98" width="150" height="92" rx="3" fill="#8fae94"/><path d="M120 217h54l11 29h-76zM91 250h115" fill="#ce8559" stroke="#2c5946" stroke-width="5"/><path d="m112 133 23 24 49-49" fill="none" stroke="#f7eee1" stroke-width="10" stroke-linecap="round"/><rect x="215" y="168" width="55" height="75" fill="#f4e5ca" stroke="#2c5946" stroke-width="4"/><path d="M224 190h35m-35 12h29m-29 12h26" stroke="#d2845b" stroke-width="4"/>`,
+ closing:`<rect x="59" y="73" width="190" height="194" rx="6" fill="#f3e7d4" stroke="#315a49" stroke-width="5"/><rect x="101" y="58" width="106" height="30" rx="5" fill="#d08559"/><path d="m85 126 9 9 16-20m-25 54 9 9 16-20m-25 52 9 9 16-20" fill="none" stroke="#447b59" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M125 126h86m-86 45h86m-86 42h66" stroke="#abbda8" stroke-width="5" stroke-linecap="round"/>`
+};
+const courses=[
+ {id:'welcome',name:'Boas-vindas à Vovó',short:'Nossa história, cultura e o primeiro dia de trabalho.',category:'Integração',time:12,tag:'COMECE AQUI',bg:'#edf0e4',color:'#285341',summary:'Conhecer a história da padaria e os comportamentos que esperamos no dia a dia é o primeiro passo para trabalhar com segurança e confiança.',lessons:[
+  {title:'Nossa história e o jeito da casa',text:'A Delícias da Vovó é uma padaria familiar. A proposta deste encontro é apresentar nossa história, a rotina das unidades e o que significa receber cada cliente com atenção.',items:['Reconhecer os valores da empresa e o papel de cada setor.','Saber a quem recorrer para tirar dúvidas.','Entender a diferença entre a Matriz e a Vila Nova.']},
+  {title:'Pontualidade e comunicação',text:'Uma operação organizada depende de avisos claros, presença no horário combinado e respeito à equipe.',items:['Conhecer os canais oficiais para comunicar faltas e atrasos.','Informar imprevistos ao responsável do turno com antecedência.','Registrar dúvidas ou situações que precisem de acompanhamento.']},
+  {title:'Como aprender no dia a dia',text:'Cada rotina tem um padrão, uma pessoa de referência e uma forma de verificar se foi aprendida.',items:['Observar o procedimento completo antes de executá-lo sozinho.','Repetir o processo com orientação.','Pedir confirmação ao responsável quando houver dúvida.']}]},
+ {id:'service',name:'Atendimento que acolhe',short:'Recepção, comunicação e experiência do cliente.',category:'Atendimento',time:18,bg:'#efe6e2',color:'#5a3a30',summary:'Atender bem não depende de improviso: depende de atenção, clareza e um padrão que toda a equipe entende.',lessons:[
+  {title:'O primeiro contato',text:'A primeira abordagem deve ser cordial, objetiva e atenta ao ritmo do cliente.',items:['Cumprimentar e demonstrar disponibilidade.','Confirmar o pedido sem interromper o cliente.','Explicar opções e tamanhos com clareza.']},
+  {title:'Comunicação e conferência',text:'Uma boa comunicação entre balcão, chapa e caixa evita retrabalho e desconforto.',items:['Repetir itens e observações importantes.','Sinalizar mudanças de pedido antes da produção.','Confirmar a entrega ao cliente.']},
+  {title:'Quando algo sai do previsto',text:'Filas, espera e erros devem ser conduzidos com respeito e solução prática.',items:['Escutar sem discutir.','Informar o responsável quando necessário.','Registrar a ocorrência para aprender com ela.']}]},
+ {id:'griddle',name:'Rotina da chapa',short:'Organização de pedidos e padrão de montagem.',category:'Produção',time:15,bg:'#f0e9d8',color:'#653e26',summary:'Padronização é transformar um pedido bem-feito em um resultado repetível, mesmo nos horários movimentados.',lessons:[
+  {title:'Preparar a estação',text:'Antes do atendimento, conferir equipamentos, utensílios e ingredientes necessários, de acordo com o procedimento interno.',items:['Verificar organização da bancada.','Separar utensílios necessários e identificados.','Sinalizar faltas ao responsável antes do pico.']},
+  {title:'Ler e executar o pedido',text:'A comanda é o ponto de referência para a montagem e a conferência.',items:['Ler o pedido completo antes de iniciar.','Respeitar as especificações e observações do cliente.','Conferir o item antes de encaminhar.']},
+  {title:'Passagem de turno',text:'Uma boa passagem de turno registra pendências e deixa a estação em condições adequadas para a próxima equipe.',items:['Comunicar itens em falta.','Sinalizar pedidos pendentes.','Seguir o checklist de limpeza e organização validado pela gestão.']}]},
+ {id:'coffee',name:'Cafeteria com padrão',short:'Consistência nas bebidas, utensílios e apresentação.',category:'Produção',time:17,bg:'#e8eee6',color:'#325844',summary:'Cada bebida deve seguir a mesma ficha e o mesmo cuidado, independentemente de quem esteja atendendo.',lessons:[
+  {title:'Fichas de preparo',text:'As receitas oficiais são a referência para ingredientes, proporção, apresentação e variações.',items:['Localizar a ficha do produto solicitado.','Conferir tamanho e variação da bebida.','Não substituir ingredientes sem orientação.']},
+  {title:'Organização da estação',text:'Estação limpa e abastecida facilita a execução e ajuda a reduzir desperdício.',items:['Conferir ingredientes e utensílios antes do pico.','Sinalizar produtos prestes a acabar.','Manter insumos fechados e identificados conforme o procedimento interno.']},
+  {title:'Entrega e apresentação',text:'O pedido só termina após a conferência final.',items:['Conferir o item com a comanda.','Observar apresentação e limpeza externa do recipiente.','Entregar ou encaminhar à área correta.']}]},
+ {id:'display',name:'Vitrine que vende',short:'Reposição, apresentação e identificação de produtos.',category:'Atendimento',time:14,bg:'#f4e9dc',color:'#6b3e2d',summary:'Uma vitrine organizada vende melhor e facilita o trabalho de quem atende e repõe.',lessons:[
+  {title:'Apresentação da vitrine',text:'Organização e identificação permitem que o cliente encontre o que deseja com menos dúvidas.',items:['Verificar etiquetas e nomes dos produtos.','Manter a exposição organizada, respeitando o padrão de cada grupo.','Avisar a equipe sobre itens em falta.']},
+  {title:'Reposição coordenada',text:'A reposição precisa considerar prioridade, movimentação e orientação de armazenamento de cada produto.',items:['Alinhar reposição com a produção.','Usar o padrão de identificação de cada item.','Seguir as orientações internas de conservação e validade.']},
+  {title:'Conferência final',text:'A apresentação é uma responsabilidade compartilhada entre produção, vitrine e atendimento.',items:['Revisar identificação e integridade dos produtos.','Confirmar mudanças de preço com o responsável.','Registrar pontos recorrentes de melhoria.']}]},
+ {id:'rush',name:'Sábado sem caos',short:'Papéis da equipe, filas e organização no pico.',category:'Operação',time:20,tag:'ESSENCIAL',bg:'#eee7d8',color:'#3f4d31',summary:'Nos horários de maior movimento, o padrão precisa ajudar — e não atrapalhar. O objetivo é dar clareza ao fluxo de trabalho.',lessons:[
+  {title:'Distribuição de funções',text:'Cada pessoa precisa saber sua função principal e como pedir ajuda quando o movimento muda.',items:['Conhecer os responsáveis por balcão, chapa, cafeteria e entrega.','Definir quem coordena mudanças de prioridade.','Evitar trocas de função sem alinhamento.']},
+  {title:'Fluxo de comandas',text:'A comanda deve ser identificável e acompanhada do começo ao fim do processo.',items:['Manter a sequência conforme o procedimento acordado.','Sinalizar pedidos com observações e alterações.','Conferir antes de liberar o pedido.']},
+  {title:'Filas e cancelamentos',text:'Picos exigem comunicação rápida e decisões consistentes.',items:['Informar tempos de espera com base na situação real.','Seguir o procedimento definido para cancelamentos.','Pedir apoio antes que o acúmulo se transforme em erro.']}]},
+ {id:'orders',name:'Encomendas sem erro',short:'Registro, confirmação e entrega de pedidos.',category:'Operação',time:16,bg:'#e8ece2',color:'#31503d',summary:'Uma encomenda bem registrada reduz dúvidas e protege a confiança do cliente.',lessons:[
+  {title:'Registrar corretamente',text:'Cada encomenda precisa estar completa e legível para quem vai produzir, conferir e entregar.',items:['Conferir nome e contato do cliente.','Registrar item, quantidade, variações, data e horário combinados.','Incluir observações relevantes.']},
+  {title:'Confirmar prazos e disponibilidade',text:'Antes de prometer, é preciso verificar as condições reais do pedido.',items:['Consultar prazos e limites de produção vigentes.','Confirmar alterações antes de registrar.','Encaminhar pedidos fora do padrão ao responsável.']},
+  {title:'Conferir a entrega',text:'A entrega é a última etapa de qualidade.',items:['Comparar itens prontos com a encomenda.','Verificar identificação e embalagem.','Registrar retirada ou entrega conforme o procedimento.']}]},
+ {id:'hygiene',name:'Boas práticas',short:'Higiene, segurança e cuidado com os alimentos.',category:'Produção',time:15,bg:'#eaf0eb',color:'#2e5849',summary:'Orientações introdutórias de higiene. O treinamento oficial deve usar o Manual de Boas Práticas e os POPs validados pela empresa.',lessons:[
+  {title:'Higiene pessoal e das mãos',text:'Boas práticas dependem de hábitos consistentes e do cumprimento do material oficial adotado pela empresa.',items:['Seguir os momentos e a técnica de higienização do POP.','Usar uniforme e proteção conforme a função.','Informar situações que possam comprometer a segurança dos alimentos.']},
+  {title:'Organização e identificação',text:'Cada produto deve ser armazenado e identificado conforme seu procedimento e requisitos aplicáveis.',items:['Localizar os locais designados de armazenamento.','Conferir identificação e condições de conservação.','Sinalizar qualquer desvio ao responsável.']},
+  {title:'Limpeza com responsabilidade',text:'Limpeza e sanitização devem seguir produtos, diluições e frequências previstos nos POPs oficiais.',items:['Consultar a instrução de limpeza da estação.','Não improvisar mistura de saneantes.','Registrar a conclusão quando o procedimento exigir.']}]},
+ {id:'register',name:'PDV e comandas',short:'Lançamentos, alterações e conferência do pedido.',category:'Atendimento',time:16,bg:'#f1e8dc',color:'#704e39',summary:'O atendimento depende de registro claro, conferência e boa comunicação com a equipe.',lessons:[
+  {title:'Lançar com clareza',text:'O sistema deve refletir exatamente o pedido confirmado com o cliente.',items:['Conferir produto, quantidade e variação.','Revisar observações antes de concluir.','Evitar lançamentos duplicados.']},
+  {title:'Alterações e cancelamentos',text:'Mudanças após o registro precisam seguir um fluxo definido.',items:['Conferir se a produção já começou.','Comunicar o responsável conforme o procedimento interno.','Verificar o resultado da alteração.']},
+  {title:'Fechar a conferência',text:'Antes de finalizar o atendimento, confirmar que informações e valores estão coerentes.',items:['Verificar itens e quantidade.','Diferenciar pendência de pedido concluído.','Solicitar orientação quando houver divergência.']}]},
+ {id:'closing',name:'Abertura e fechamento',short:'Checklists e passagem de turno sem pendências.',category:'Operação',time:13,bg:'#e9ede7',color:'#2f5144',summary:'Rotinas visíveis e verificáveis tornam o dia mais previsível para a equipe inteira.',lessons:[
+  {title:'Preparar a abertura',text:'A abertura é uma sequência de verificações, não uma corrida de última hora.',items:['Consultar checklist atualizado do setor.','Repor materiais previstos.','Sinalizar equipamentos ou itens com problema.']},
+  {title:'Passar o turno',text:'Informações importantes não podem depender só de memória.',items:['Registrar pendências de encomendas ou produção.','Avisar faltas de insumos e equipamentos.','Confirmar o repasse com a equipe seguinte.']},
+  {title:'Concluir o fechamento',text:'Cada setor deve encerrar o turno seguindo seu checklist específico.',items:['Conferir tarefas do checklist.','Registrar pendências para o próximo dia.','Informar problemas que exigem ação da liderança.']}]}
+];
+const cats=['Todos','Integração','Atendimento','Produção','Operação'];
+let currentCategory='Todos',currentCourse=null,currentLesson=0;
+let checked={};
+try {checked=JSON.parse(localStorage.getItem('academia-vovo-progress-v1')||'{}')||{}}catch(e){checked={}}
+function save(){try{localStorage.setItem('academia-vovo-progress-v1',JSON.stringify(checked))}catch(e){}}
+function icon(name){return `<svg viewBox="0 0 300 300" aria-hidden="true" class="poster-svg"><g stroke-linecap="round" stroke-linejoin="round">${icons[name]}</g></svg>`}
+function complete(c){return c.lessons.filter((l,i)=>checked[c.id+'-'+i]).length}
+function isDone(c){return complete(c)===c.lessons.length}
+function updateProgress(){
+ let total=courses.reduce((v,c)=>v+c.lessons.length,0),done=courses.reduce((v,c)=>v+complete(c),0),pct=Math.round(done*100/total);
+ document.getElementById('percent').textContent=pct+'%';document.getElementById('progressFill').style.width=pct+'%';
+ document.getElementById('completedCount').textContent=done+' de '+total+' etapas concluídas';
+ document.getElementById('courseCount').textContent=courses.filter(isDone).length+' de '+courses.length+' cursos';
+}
+function renderFilters(){
+ document.getElementById('filters').innerHTML=cats.map(c=>`<button class="chip ${c===currentCategory?'on':''}" data-cat="${c}" aria-pressed="${c===currentCategory}">${c}</button>`).join('');
+ document.querySelectorAll('[data-cat]').forEach(b=>b.addEventListener('click',()=>{currentCategory=b.dataset.cat;renderFilters();renderCards()}));
+}
+function renderCards(){
+ const query=document.getElementById('search').value.trim().toLocaleLowerCase('pt-BR');const pending=document.getElementById('pendingOnly').checked;const sort=document.getElementById('sort').value;
+ let arr=courses.filter(c=>(currentCategory==='Todos'||c.category===currentCategory)&&(!pending||!isDone(c))&&(!query||(c.name+' '+c.short+' '+c.category).toLocaleLowerCase('pt-BR').includes(query)));
+ if(sort==='az')arr.sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));if(sort==='duration')arr.sort((a,b)=>a.time-b.time);
+ document.getElementById('cards').innerHTML=arr.map(c=>{
+ const done=complete(c),total=c.lessons.length;
+ return `<article class="course"><button class="poster" data-open="${c.id}" style="--bg:${c.bg};--foreground:${c.color}" aria-label="Abrir ${c.name}">
+ <span class="poster-title">${c.name}</span>${c.tag?`<span class="poster-badge">${c.tag.replace(' ','<br>')}</span>`:''}${icon(c.id)}</button>
+ <h3 class="card-description">${c.short}</h3><div class="card-info"><span>${c.category}</span><span>${c.time} min</span><span>${total} aulas</span></div>
+ <div class="card-footer"><span class="card-progress ${done===0?'none':''}">${done===total?'✓ Concluído':done===0?'Ainda não iniciado':`${done} de ${total} aulas`}</span>
+ <button class="action" data-open="${c.id}">${done===total?'Revisar':done?'Continuar':'Começar'}</button></div></article>`;
+ }).join('');
+ document.getElementById('empty').style.display=arr.length?'none':'block';
+ document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openCourse(b.dataset.open)));
+}
+function openCourse(id){currentCourse=courses.find(c=>c.id===id);currentLesson=Math.max(0,currentCourse.lessons.findIndex((x,i)=>!checked[id+'-'+i]));renderModal();document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';document.addEventListener('keydown',escapeModal)}
+function renderModal(){
+ if(!currentCourse)return;
+ let c=currentCourse,l=c.lessons[currentLesson],done=checked[c.id+'-'+currentLesson];
+ document.getElementById('modalHead').innerHTML=`<div class="modal-label">${c.category} · ${c.time} minutos · ${complete(c)} de ${c.lessons.length} aulas concluídas</div><h2 id="modalTitle">${c.name}</h2><p>${c.summary}</p>`;
+ document.getElementById('modalBody').innerHTML=`<aside class="lesson-nav"><h4>Conteúdo do treinamento</h4>${c.lessons.map((x,i)=>`<button class="lesson-button ${currentLesson===i?'active':''}" data-lesson="${i}"><span class="lesson-dot ${checked[c.id+'-'+i]?'done':''}">${checked[c.id+'-'+i]?'✓':i+1}</span><span>${x.title}</span></button>`).join('')}</aside>
+ <div class="lesson-content"><span class="lesson-kicker">Aula ${currentLesson+1} de ${c.lessons.length}</span><h3>${l.title}</h3><p>${l.text}</p><div class="lesson-list"><h4>Pontos de atenção</h4><ul>${l.items.map(t=>`<li>${t}</li>`).join('')}</ul></div>
+ <button class="action ${done?'secondary':''}" id="completeLesson">${done?'✓ Marcar como pendente':'✓ Marcar aula como concluída'}</button>
+ <div class="lesson-navbuttons"><button class="action secondary" ${currentLesson===0?'disabled style="opacity:.45"':''} id="prevLesson">← Anterior</button><button class="action secondary" id="nextLesson">${currentLesson===c.lessons.length-1?'Voltar ao início':'Próxima aula →'}</button></div>
+ <div class="helper-note">Protótipo: o conteúdo é um modelo inicial e deve ser validado pela gestão. O progresso fica salvo somente neste navegador. Ainda não há login, vídeos, avaliações ou acompanhamento individual da equipe.</div></div>`;
+ document.querySelectorAll('[data-lesson]').forEach(b=>b.addEventListener('click',()=>{currentLesson=Number(b.dataset.lesson);renderModal()}));
+ document.getElementById('completeLesson').addEventListener('click',()=>{let key=c.id+'-'+currentLesson;if(checked[key])delete checked[key];else checked[key]=true;save();updateProgress();renderModal();renderCards();toast(checked[key]?'Aula concluída!':'Aula marcada como pendente.')});
+ document.getElementById('prevLesson').addEventListener('click',()=>{currentLesson=Math.max(0,currentLesson-1);renderModal()});
+ document.getElementById('nextLesson').addEventListener('click',()=>{currentLesson=(currentLesson+1)%c.lessons.length;renderModal()});
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';document.removeEventListener('keydown',escapeModal)}
+function escapeModal(e){if(e.key==='Escape')closeModal()}
+function toast(msg){let el=document.getElementById('notice');el.textContent=msg;el.classList.add('on');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('on'),2200)}
+function showInfo(topic){
+ currentCourse=null;document.getElementById('modalHead').innerHTML=`<div class="modal-label">Próxima etapa da plataforma</div><h2 id="modalTitle">${topic==='padroes'?'Biblioteca de padrões da casa':'Painel da liderança'}</h2><p>${topic==='padroes'?'A versão completa terá procedimentos por setor, fotos do jeito certo de montar produtos, checklists e arquivos oficiais sempre atualizados.':'A versão completa poderá ter login por colaborador, trilhas por função, aprovação dos treinamentos e relatórios de conclusão por unidade.'}</p>`;
+ document.getElementById('modalBody').innerHTML=`<div class="lesson-content" style="grid-column:1/-1"><h3>O que podemos adicionar</h3><div class="lesson-list"><ul>${(topic==='padroes'?['Fichas de preparo e fotos do resultado esperado','Checklists de abertura, reposição e fechamento','Procedimentos com data da última revisão e responsável','Busca por produto, estação ou tarefa']:['Cadastro de colaboradores e funções','Trilhas obrigatórias por setor e unidade','Questionário de verificação de aprendizado','Histórico, revisões e confirmação de treinamento']).map(i=>'<li>'+i+'</li>').join('')}</ul></div><p>Esta área está desenhada como proposta; não há painel conectado a um banco de dados nesta demonstração.</p><button class="action" onclick="closeModal()">Entendi</button></div>`;
+ document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';document.addEventListener('keydown',escapeModal)
+}
+document.getElementById('search').addEventListener('input',renderCards);
+document.getElementById('pendingOnly').addEventListener('change',renderCards);
+document.getElementById('sort').addEventListener('change',renderCards);
+document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Deseja apagar o progresso desta demonstração, salvo neste navegador?')){checked={};save();updateProgress();renderCards();toast('Progresso de demonstração reiniciado.')}});
+renderFilters();renderCards();updateProgress();
+</script>
+</body>
+</html>
