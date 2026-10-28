@@ -152,10 +152,10 @@
     if(header && !header.querySelector('.sd-mode-actions')){
       header.insertAdjacentHTML('beforeend',
         '<div class="sd-mode-actions"><button type="button" id="sdReadMode" class="sd-mode-button" aria-label="Abrir leitura do funcionário">▤ Leitura no celular</button><button type="button" id="sdManagerMode" class="sd-mode-button sd-mode-strong" aria-label="Abrir slides para o gestor">▣ Slides do gestor</button></div>');
-      document.getElementById('sdReadMode').addEventListener('click',()=>{currentStage=0;renderModal()});
+      document.getElementById('sdReadMode').addEventListener('click',()=>{currentLesson=0;currentStage=0;renderModal()});
       document.getElementById('sdManagerMode').addEventListener('click',openSlides);
     }
-    if(currentStage!==0) return;
+    if(currentStage!==0 || currentLesson!==0) return;
     const target=document.querySelector('#modalBody .learning-stage');
     if(!target) return;
     target.innerHTML =
