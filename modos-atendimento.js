@@ -42,7 +42,7 @@
   const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const style = document.createElement('style');
   style.textContent = String.raw`
-/* Design system: Times para títulos; Garet para a leitura; DM Sans nos comandos. */
+/* Design system v2: Times New Roman MT Condensed = título; Balgin = subtítulo; DM Sans = corpo e comandos. */
 .sd-reader .sd-lead,.sd-reader .sd-block p,.sd-reader .sd-reader-intro p,
 .sd-slide-lead,.sd-slide-points strong{font-family:var(--ss-text,"DM Sans",Arial,sans-serif)}
 .sd-reader .sd-page-label,.sd-reader .sd-page-top,.sd-reader .sd-block h4,
@@ -126,6 +126,33 @@ font-family:var(--ss-interface,"DM Sans",Arial,sans-serif)}
  .sd-toolbar-actions button{font-size:11px;padding:8px}
  .sd-slide-toolbar{align-items:flex-start;flex-direction:column}
  .sd-slide-bottom>span{display:none}
+}
+
+/* Tipografia do conteúdo editorial: títulos, subtítulos e corpo. */
+.sd-reader-intro h3,.sd-page h3,.sd-slide-inner h2{
+  font-family:var(--ss-serif,"Times New Roman",serif);font-weight:400;
+}
+.sd-reader-intro p,.sd-page .sd-lead,
+.sd-page .sd-block h4,.sd-slide-lead,
+.sd-slide-points strong,.sd-slide-question p,
+.sd-reader-finish strong{
+  font-family:var(--ss-subtitle,"Barlow Condensed","Arial Narrow",sans-serif);
+  font-weight:500;letter-spacing:0;
+}
+.sd-reader .sd-block p,.sd-reader .sd-reader-foot,
+.sd-reader .sd-reader-finish p,.sd-slide-note p,
+.sd-slide-overlay .sd-slide-note{
+  font-family:var(--ss-text,"DM Sans",Arial,sans-serif);
+}
+.sd-page .sd-block h4{font-size:clamp(18px,2.25vw,23px);line-height:1.25}
+.sd-slide-lead{font-size:clamp(22px,2.6vw,31px);line-height:1.35}
+.sd-slide-question p{font-size:clamp(21px,2.7vw,30px);line-height:1.3}
+@media(max-width:700px){
+  .sd-reader .sd-page .sd-lead{font-size:23px!important;line-height:1.35!important}
+  .sd-reader .sd-block p{font-size:17px!important;line-height:1.6!important}
+  .sd-page .sd-block h4{font-size:19px}
+  .sd-slide-lead{font-size:24px}
+  .sd-slide-points strong{font-size:23px}
 }
 `;
   style.textContent = style.textContent.replace(/^@STYLE@|@STYLE@$/g,'');
