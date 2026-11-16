@@ -7,7 +7,7 @@
 <title>Escola da Casa | Delícias da Vovó</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {--ink:#25362e;--forest:#275344;--forest2:#416e56;--orange:#c46c46;--sage:#d9e4d5;--cream:#fcfbf8;--line:#e9e9e2;--muted:#748176;--light:#f4f3ec;--shadow:0 20px 70px rgba(31,56,43,.12)}
 * {box-sizing:border-box}
@@ -487,40 +487,50 @@ button, a, input, select {touch-action: manipulation;}
 }
 
 
-/* PADRÃO TIPOGRÁFICO SORRIR & SERVIR (v1)
-   Única serifada: Times NR MT Pro Condensed. Garet para leitura.
-   As fontes licenciadas não estão distribuídas neste site;
-   os substitutos garantem legibilidade até a instalação autorizada. */
+/* PADRÃO TIPOGRÁFICO SORRIR & SERVIR (v2) — 16/11/2026
+   TÍTULO: Times New Roman MT Condensed
+   SUBTÍTULO: Balgin
+   CORPO E INTERFACE: DM Sans
+   Arquivos licenciados das duas primeiras fontes ainda não estão hospedados.
+   Fontes de reserva são usadas no navegador até instalação autorizada. */
 :root{
-  --ss-serif:"Times NR MT Pro Condensed","Times NR MT Pro Cond","Times New Roman",Times,serif;
-  --ss-text:"Garet","Century Gothic","Avenir Next","DM Sans",Arial,sans-serif;
+  --ss-serif:"Times New Roman MT Condensed","Times NR MT Pro Condensed","Times New Roman",Times,serif;
+  --ss-subtitle:"Balgin","Balgin Condensed","Barlow Condensed","Arial Narrow",sans-serif;
+  --ss-text:"DM Sans",Arial,sans-serif;
   --ss-interface:"DM Sans",Arial,sans-serif;
 }
-.modal-head h2, #modalTitle{
-  font-family:var(--ss-serif);font-weight:400;
-  letter-spacing:-.035em;line-height:1.08;
-  font-size:clamp(33px,4.7vw,47px);
-}
-.modal-head p,.modal-head-stats,
-.modal-body .learning-stage,
-.modal-body .pdf-intro p{
-  font-family:var(--ss-text);
-}
-.modal-body .learning-stage h3,
-.modal-body .pdf-intro h3,
+.modal-head h2,#modalTitle,
+.modal-body .learning-stage h3,.modal-body .pdf-intro h3,
 .modal-body .training-done h3{
   font-family:var(--ss-serif);font-weight:400;
-  font-size:clamp(32px,4.5vw,42px);line-height:1.12;
-  letter-spacing:-.025em;
+  line-height:1.12;letter-spacing:-.025em;
 }
-.modal-body .learning-stage p,
-.modal-body .pdf-intro p,
-.modal-body .task-check span,
-.modal-body .quiz-option span,
-.modal-body .practice-callout,
-.modal-body .visual-copy span{
-  font-family:var(--ss-text);font-size:clamp(16px,1.6vw,18px);
-  line-height:1.58;letter-spacing:0;
+.modal-head h2,#modalTitle{font-size:clamp(35px,4.7vw,48px)}
+.modal-body .learning-stage h3,.modal-body .pdf-intro h3,
+.modal-body .training-done h3{font-size:clamp(33px,4.5vw,44px)}
+.modal-head p,.modal-head-stats,.modal-body .learning-stage,
+.modal-body .pdf-intro p{font-family:var(--ss-text)}
+/* Subtítulos e frases de apoio: apenas Balgin e seus substitutos. */
+.modal-body .learning-stage h4,
+.modal-body .visual-copy strong,
+.modal-body .practice-callout strong,
+.modal-body .pdf-completion h4,
+.modal-body .pdf-intro .lesson-kicker{
+  font-family:var(--ss-subtitle);
+  font-weight:500;line-height:1.25;letter-spacing:0;
+}
+.modal-body .learning-stage h4,
+.modal-body .pdf-completion h4{font-size:clamp(21px,2.5vw,26px)}
+.modal-body .visual-copy strong,
+.modal-body .practice-callout strong{font-size:clamp(18px,2vw,22px)}
+/* Corpo de leitura: DM Sans e entrelinha generosa. */
+.modal-body .learning-stage p,.modal-body .pdf-intro p,
+.modal-body .task-check span,.modal-body .quiz-option span,
+.modal-body .practice-callout,.modal-body .visual-copy span,
+.modal-body .lesson-points li{
+  font-family:var(--ss-text);
+  font-size:clamp(16px,1.6vw,18px);
+  line-height:1.6;letter-spacing:0;
 }
 .modal-body .pdf-intro h3{margin:8px 0 10px}
 .modal-body .lesson-kicker,.modal-body .stage-badge,
@@ -531,20 +541,25 @@ button, a, input, select {touch-action: manipulation;}
 .modal-head .modal-label{
   font-family:var(--ss-interface);
 }
-.modal-body .lesson-kicker,
-.modal-body .stage-badge{font-size:12px;letter-spacing:.10em}
-.modal-body .pdf-help,.modal-body .helper-note{font-size:13px!important;line-height:1.55}
-.modal-body .pdf-page-button,
-.modal-body .action,.modal-body .pdf-download{
-  font-size:14px;line-height:1.3;
+.modal-body .lesson-kicker,.modal-body .stage-badge{
+  font-size:12px;letter-spacing:.10em;
 }
+.modal-body .pdf-help,.modal-body .helper-note{
+  font-family:var(--ss-text);font-size:13px!important;line-height:1.55
+}
+.modal-body .pdf-page-button,.modal-body .action,
+.modal-body .pdf-download{font-size:14px;line-height:1.3}
 .modal-body .pdf-page-button{min-height:46px}
 .modal-body.pdf-course .lesson-content{width:100%;max-width:690px}
 @media(max-width:600px){
   .modal-head h2,#modalTitle{font-size:clamp(32px,8.5vw,39px)}
-  .modal-body .learning-stage h3,.modal-body .pdf-intro h3{font-size:clamp(30px,8vw,38px)}
+  .modal-body .learning-stage h3,
+  .modal-body .pdf-intro h3{font-size:clamp(30px,8vw,38px)}
+  .modal-body .learning-stage h4,
+  .modal-body .pdf-completion h4{font-size:23px}
   .modal-body .learning-stage p,.modal-body .pdf-intro p,
-  .modal-body .task-check span,.modal-body .quiz-option span{font-size:16px;line-height:1.6}
+  .modal-body .task-check span,.modal-body .quiz-option span,
+  .modal-body .lesson-points li{font-size:16px;line-height:1.6}
   .modal-body.pdf-course .lesson-content{padding:18px 16px 28px}
   .modal-body .pdf-intro{flex-wrap:wrap}
   .modal-body .pdf-download{min-height:44px}
