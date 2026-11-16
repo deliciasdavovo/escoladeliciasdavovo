@@ -551,7 +551,17 @@ const icons={
  register:`<rect x="52" y="80" width="190" height="133" rx="8" fill="#eddbc0" stroke="#2c5946" stroke-width="6"/><rect x="72" y="98" width="150" height="92" rx="3" fill="#8fae94"/><path d="M120 217h54l11 29h-76zM91 250h115" fill="#ce8559" stroke="#2c5946" stroke-width="5"/><path d="m112 133 23 24 49-49" fill="none" stroke="#f7eee1" stroke-width="10" stroke-linecap="round"/><rect x="215" y="168" width="55" height="75" fill="#f4e5ca" stroke="#2c5946" stroke-width="4"/><path d="M224 190h35m-35 12h29m-29 12h26" stroke="#d2845b" stroke-width="4"/>`,
  closing:`<rect x="59" y="73" width="190" height="194" rx="6" fill="#f3e7d4" stroke="#315a49" stroke-width="5"/><rect x="101" y="58" width="106" height="30" rx="5" fill="#d08559"/><path d="m85 126 9 9 16-20m-25 54 9 9 16-20m-25 52 9 9 16-20" fill="none" stroke="#447b59" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M125 126h86m-86 45h86m-86 42h66" stroke="#abbda8" stroke-width="5" stroke-linecap="round"/>`
 };
+icons.receive=icons.service;
 const courses=[
+ {id:'receive',name:'A arte de receber',short:'Sorrir & Servir: presença, hospitalidade e primeiro contato.',category:'Atendimento',time:15,tag:'SORRIR & SERVIR',bg:'#e6ede0',color:'#305741',summary:'Uma leitura visual sobre receber com atenção, perceber o cliente, ouvir e agir. Treine no balcão e confira três situações reais.',lessons:[
+  {title:'Ver, ouvir, perceber e agir',text:'Um bom acolhimento começa quando o cliente percebe que foi notado.',items:[
+    'Observar uma chegada de cliente e reconhecer sua presença com cordialidade.',
+    'Simular como comunicar uma pequena espera sem deixar o cliente sem resposta.',
+    'Fazer uma pergunta objetiva para entender o pedido antes de registrar.',
+    'Praticar um atendimento com orientação e pedir feedback ao responsável.'
+  ]}
+ ]},
+
  {id:'welcome',name:'Boas-vindas à Vovó',short:'Conheça nossa história, os combinados da casa e o cuidado em equipe.',category:'Integração',time:12,tag:'COMECE AQUI',bg:'#edf0e4',color:'#285341',summary:'Uma leitura visual sobre a nossa história, as duas unidades e o cuidado em cada pedido. Depois, pratique e confira o aprendizado.',lessons:[
   {title:'Nossa casa, nosso cuidado',text:'Leia as oito páginas do material de Boas-vindas à Vovó e depois pratique com orientação.',items:[
    'Localizar quem é o responsável pelo seu turno e por onde comunicar imprevistos.',
@@ -600,20 +610,28 @@ const courses=[
 const cats=['Todos','Integração','Atendimento','Produção','Operação'];
 let currentCategory='Todos',currentCourse=null,currentLesson=0,currentStage=0,selectedQuiz=null,quizFeedback=null;
 let pdfPage=1;
+const receivePdfTitles=['Capa — Sorrir & Servir','Como você recebe alguém na sua casa?','Estar presente e atento','Ver, ouvir, perceber e agir','O cliente chegou e você está ocupado','Ouvir é evitar erros pequenos','Atendimento nos detalhes','Agora é com você'];
+const receiveQuizQuestions=[
+ {title:'Um cliente chega enquanto você termina outro pedido. O que fazer?',answers:['Cumprimentar, reconhecer a chegada e explicar que vai atendê-lo em seguida.','Ignorar até terminar, porque está ocupado.','Dizer apenas “espera aí” sem olhar para ele.'],correct:'Cumprimentar, reconhecer a chegada e explicar que vai atendê-lo em seguida.'},
+ {title:'Uma pessoa pede uma torta para levar, mas não informou o sabor. Qual o próximo passo?',answers:['Perguntar qual sabor deseja antes de confirmar o pedido.','Escolher o sabor mais vendido sem perguntar.','Registrar apenas “torta” e deixar a equipe descobrir.'],correct:'Perguntar qual sabor deseja antes de confirmar o pedido.'},
+ {title:'Você não sabe se um produto está disponível. Como responder?',answers:['Conferir a disponibilidade antes de prometer ao cliente.','Afirmar que está disponível para não perder a venda.','Oferecer outro produto sem explicar a dúvida.'],correct:'Conferir a disponibilidade antes de prometer ao cliente.'}
+];
+let receiveQuizStep=0;
 const pdfTitles=['Capa — Boas-vindas à Vovó','Tudo começa com pessoas','Duas unidades, um mesmo cuidado','Um pedido, várias mãos','Conferir leva menos que refazer','Informação boa chega a tempo','Você não precisa acertar de primeira','Agora é com você'];
 function changePdfPage(next){
  pdfPage=Math.max(1,Math.min(8,next));
  const img=document.getElementById('pdfPageImage');
  if(!img)return;
- img.src='materiais/boas-vindas-paginas/pagina-'+String(pdfPage).padStart(2,'0')+'.webp';
- img.alt='Página '+pdfPage+' de 8: '+pdfTitles[pdfPage-1];
+ const photoFolder=currentCourse?.id==='receive'?'materiais/arte-de-receber/':'materiais/boas-vindas-paginas/';
+ img.src=photoFolder+'pagina-'+String(pdfPage).padStart(2,'0')+'.webp';
+ img.alt='Página '+pdfPage+' de 8: '+(currentCourse?.id==='receive'?receivePdfTitles:pdfTitles)[pdfPage-1];
  const count=document.getElementById('pdfPageCount');if(count)count.textContent=String(pdfPage).padStart(2,'0')+' / 08';
  const bar=document.getElementById('pdfReadProgress');if(bar)bar.style.width=(pdfPage/8*100)+'%';
  const prev=document.getElementById('pdfPrevPage');if(prev)prev.disabled=pdfPage===1;
  const nxt=document.getElementById('pdfNextPage');if(nxt)nxt.disabled=pdfPage===8;
  const cta=document.getElementById('pdfContinue');if(cta)cta.hidden=pdfPage!==8;
  // Preload a single upcoming page for smooth reading on slower connections.
- if(pdfPage<8){const preload=new Image();preload.src='materiais/boas-vindas-paginas/pagina-'+String(pdfPage+1).padStart(2,'0')+'.webp';}
+ if(pdfPage<8){const preload=new Image();preload.src=(currentCourse?.id==='receive'?'materiais/arte-de-receber/':'materiais/boas-vindas-paginas/')+'pagina-'+String(pdfPage+1).padStart(2,'0')+'.webp';}
 }
 
 let practiceChecks={};
@@ -664,6 +682,7 @@ const quizWrong={
 };
 function getQuiz(c,l){
  // One short scenario for each lesson. These questions review knowledge, not on-the-job proficiency.
+ if(c.id==='receive'){return receiveQuizQuestions[receiveQuizStep];}
  if(c.id==='welcome'){
   const correct='Conferir a disponibilidade antes de confirmar o pedido ao cliente.';
   return {title:'Um cliente pediu um pão de bolinha de doce de leite, mas você não sabe se está disponível. O que fazer?',answers:[
@@ -684,7 +703,7 @@ function openCourse(id){
  currentCourse=courses.find(c=>c.id===id);
  currentLesson=currentCourse.lessons.findIndex((l,i)=>!checked[id+'-'+i]);
  if(currentLesson<0)currentLesson=0;
- currentStage=0;pdfPage=1;selectedQuiz=null;quizFeedback=null;
+ currentStage=0;pdfPage=1;receiveQuizStep=0;selectedQuiz=null;quizFeedback=null;
  renderModal();document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';document.addEventListener('keydown',escapeModal);
 }
 function chooseLesson(i){currentLesson=i;currentStage=0;pdfPage=1;selectedQuiz=null;quizFeedback=null;renderModal()}
@@ -711,8 +730,18 @@ function renderModal(){
  <span class="step-name">Conferir</span></button></div>`;
  let content='';
  if(currentStage===0){
-  if(c.id==='welcome'){
+  if(c.id==='welcome'||c.id==='receive'){
    content="<div class=\"learning-stage pdf-module\" aria-label=\"Material visual de boas-vindas\">\n  <div class=\"pdf-intro\">\n   <div><span class=\"lesson-kicker\">ETAPA 01 · ENTENDER</span><h3>Boas-vindas à Vovó.</h3><p>Conheça nossa história e os combinados da casa, página por página.</p></div>\n   <a class=\"pdf-download\" href=\"materiais/boas-vindas-entender.pdf\" download=\"Escola_da_Casa_Boas_Vindas_Entender.pdf\" aria-label=\"Baixar material completo em PDF\">↧ Baixar PDF</a>\n  </div>\n  <div class=\"pdf-read-bar\" aria-hidden=\"true\"><div id=\"pdfReadProgress\" style=\"width:12.5%\"></div></div>\n  <div class=\"pdf-page-frame\" id=\"pdfReader\"><img id=\"pdfPageImage\" src=\"materiais/boas-vindas-paginas/pagina-01.webp\" alt=\"Página 1 de 8: capa Boas-vindas à Vovó\" decoding=\"async\"></div>\n  <div class=\"pdf-pager\">\n    <button type=\"button\" id=\"pdfPrevPage\" class=\"pdf-page-button\" disabled>← Anterior</button>\n    <span id=\"pdfPageCount\" class=\"pdf-count\" aria-live=\"polite\">01 / 08</span>\n    <button type=\"button\" id=\"pdfNextPage\" class=\"pdf-page-button pdf-next\">Próxima →</button>\n  </div>\n  <div class=\"pdf-completion\" id=\"pdfContinue\" hidden><span class=\"stage-badge\">FIM DA LEITURA</span><h4>Agora é com você.</h4><p>O próximo passo é observar a rotina e praticar com a orientação da equipe.</p><button type=\"button\" class=\"action\" id=\"continueToPractice\">Ir para Praticar →</button></div>\n  <p class=\"pdf-help\">Você também pode baixar o PDF para consultar depois. Aqui a leitura acontece sem sair da aula.</p>\n</div>";
+   if(c.id==='receive'){
+    content=content
+     .replace('Material visual de boas-vindas','Material visual A arte de receber')
+     .replace('Boas-vindas à Vovó.','A arte de receber.')
+     .replace('Conheça nossa história e os combinados da casa, página por página.','Sorrir & Servir: recepção e hospitalidade em oito páginas, com situações de balcão.')
+     .replaceAll('materiais/boas-vindas-entender.pdf','materiais/arte-de-receber.pdf')
+     .replace('Escola_da_Casa_Boas_Vindas_Entender.pdf','Sorrir_e_Servir_A_Arte_de_Receber.pdf')
+     .replaceAll('materiais/boas-vindas-paginas/','materiais/arte-de-receber/')
+     .replace('capa Boas-vindas à Vovó','capa Sorrir & Servir');
+   }
   }else{
   content=`<div class="learning-stage"><span class="lesson-kicker">AULA ${currentLesson+1} DE ${c.lessons.length} · ETAPA 01</span><h3>${l.title}</h3><p>${l.text}</p>
   <div class="learning-visual"><div class="visual-figure">${icon(c.id)}</div><div class="visual-copy"><strong>Observe como fazemos por aqui.</strong><span>Leia o contexto e os pontos essenciais antes de passar à prática.</span></div></div>
@@ -728,7 +757,7 @@ function renderModal(){
  }else if(currentStage===2){
  const q=getQuiz(c,l);
  content=`<div class="learning-stage"><span class="lesson-kicker">AULA ${currentLesson+1} DE ${c.lessons.length} · ETAPA 03</span><h3>Vamos conferir?</h3><p>Uma pergunta rápida para fixar o principal cuidado desta aula.</p>
- <div class="quiz-card"><span class="stage-badge">SITUAÇÃO DO DIA A DIA</span><h4>${q.title}</h4>${q.answers.map((a,i)=>`<label class="quiz-option ${selectedQuiz===i?'selected':''}"><input type="radio" name="quizChoice" value="${i}" ${selectedQuiz===i?'checked':''}/><span>${a}</span></label>`).join('')}</div>
+ <div class="quiz-card"><span class="stage-badge">SITUAÇÃO ${c.id==='receive'?(receiveQuizStep+1)+' DE 3':'DO DIA A DIA'}</span><h4>${q.title}</h4>${q.answers.map((a,i)=>`<label class="quiz-option ${selectedQuiz===i?'selected':''}"><input type="radio" name="quizChoice" value="${i}" ${selectedQuiz===i?'checked':''}/><span>${a}</span></label>`).join('')}</div>
  ${quizFeedback?`<div role="status" class="quiz-feedback ${quizFeedback==='good'?'good':'bad'}">${quizFeedback==='good'?'Muito bem! Essa atitude segue o padrão apresentado na aula.':'Ainda não. Releia os pontos da aula e tente novamente.'}</div>`:''}
  <div class="step-bottom"><button class="action secondary" id="backToPractice">← Voltar à prática</button><button class="action" id="checkQuiz" ${selectedQuiz===null?'disabled':''}>Verificar resposta →</button></div></div>`;
  }else{
@@ -737,7 +766,7 @@ function renderModal(){
  <div class="step-bottom" style="justify-content:center"><button class="action secondary" id="reviewLesson">Rever a aula</button>${next>=0?`<button class="action" id="goNextIncomplete">Ir para a próxima aula →</button>`:`<button class="action" id="finishCourse">Voltar aos treinamentos →</button>`}</div></div>`;
  }
  document.getElementById('modalBody').classList.toggle('pdf-course',c.id==='welcome');
- document.getElementById('modalBody').innerHTML=(c.id==='welcome'?'':nav)+`<div class="lesson-content">${stageHeader}${content}<div class="helper-note">Versão demonstrativa: as orientações devem ser aprovadas pela gestão. O progresso fica apenas neste navegador; não há login, prova formal nem validação automática da competência profissional.</div></div>`;
+ document.getElementById('modalBody').innerHTML=((c.id==='welcome'||c.id==='receive')?'':nav)+`<div class="lesson-content">${stageHeader}${content}<div class="helper-note">Versão demonstrativa: as orientações devem ser aprovadas pela gestão. O progresso fica apenas neste navegador; não há login, prova formal nem validação automática da competência profissional.</div></div>`;
  document.querySelectorAll('[data-lesson]').forEach(b=>b.addEventListener('click',()=>chooseLesson(Number(b.dataset.lesson))));
  document.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>moveStage(Number(b.dataset.stage))));
  const byId=(id,fn)=>{let el=document.getElementById(id);if(el)el.addEventListener('click',fn)};
@@ -748,7 +777,7 @@ function renderModal(){
    let x0=null,y0=null;
    reader.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
    reader.addEventListener('touchend',e=>{if(x0===null||e.changedTouches.length!==1)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.4)changePdfPage(pdfPage+(dx<0?1:-1));x0=null;y0=null;},{passive:true});
-   const im=document.getElementById('pdfPageImage');if(im)im.addEventListener('error',()=>{reader.classList.add('pdf-load-error');reader.innerHTML='<p>Não foi possível carregar esta página. <a href="materiais/boas-vindas-entender.pdf" target="_blank" rel="noopener">Abrir PDF completo</a></p>';});
+   const im=document.getElementById('pdfPageImage');if(im)im.addEventListener('error',()=>{reader.classList.add('pdf-load-error');reader.innerHTML='<p>Não foi possível carregar esta página. <a href="'+(currentCourse?.id==='receive'?'materiais/arte-de-receber.pdf':'materiais/boas-vindas-entender.pdf')+'" target="_blank" rel="noopener">Abrir PDF completo</a></p>';});
  }
  byId('continueToPractice',()=>moveStage(1));byId('backToTheory',()=>moveStage(0));byId('continueToQuiz',()=>moveStage(2));byId('backToPractice',()=>moveStage(1));
  document.querySelectorAll('[data-practice]').forEach(input=>input.addEventListener('change',()=>{
@@ -761,7 +790,11 @@ function renderModal(){
   const q=getQuiz(c,l);
   if(selectedQuiz===null)return;
   quizFeedback=q.answers[selectedQuiz]===q.correct?'good':'bad';
-  if(quizFeedback==='good'){checked[key]=true;save();updateProgress();renderCards();currentStage=3;selectedQuiz=null;toast('Aula revisada com sucesso!')}
+  if(quizFeedback==='good'){
+   if(c.id==='receive'&&receiveQuizStep<2){
+    receiveQuizStep++;selectedQuiz=null;quizFeedback=null;renderModal();toast('Boa! Vamos à próxima situação.');return;
+   }
+   checked[key]=true;save();updateProgress();renderCards();currentStage=3;selectedQuiz=null;toast('Aula revisada com sucesso!')}
   renderModal();
  });
  byId('reviewLesson',()=>moveStage(0));
