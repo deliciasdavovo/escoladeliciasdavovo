@@ -1,39 +1,50 @@
-# Escola da Casa — padrão de tipografia Sorrir & Servir
+# Escola da Casa — padrão tipográfico Sorrir & Servir
 
-## Escolhas aprovadas
+## Fontes definidas — 16/11/2026
 
-- **Única fonte serifada:** Times NR MT Pro Condensed — capas, títulos de páginas e frases editoriais em destaque.
-- **Fonte sem serifa para leitura:** Garet — subtítulos, explicações, exemplos e orientações.
-- **Fonte de interface:** DM Sans — botões, navegação, contador de páginas, etiquetas e indicadores de progresso.
-- **Balgin não faz parte do novo padrão.** Não misturar outra serifada nos treinamentos.
+- **Títulos — Times New Roman MT Condensed:** capa, títulos principais de páginas e aulas.
+- **Subtítulos — Balgin:** chamadas secundárias, subtítulos, frases em destaque e intertítulos.
+- **Corpo — DM Sans:** explicações, exemplos, orientações, instruções e listas.
+- **Navegação e botões — DM Sans:** controles de Entender, Praticar, Conferir, paginação e progresso.
 
-## Hierarquia para os materiais verticais (420 × 747 pt)
+**Não utilizar Garet**. Evitar misturar outras fontes serifadas ao longo do treinamento.
 
-| Elemento | Fonte | Faixa de tamanho |
+## Referência de tamanhos na revista vertical (420 × 747 pt)
+
+| Elemento | Fonte | Tamanho |
 | --- | --- | --- |
-| Título da capa | Times NR MT Pro Condensed | 52–78 pt |
-| Título de página | Times NR MT Pro Condensed | 36–49 pt |
-| Frase editorial secundária | Times NR MT Pro Condensed | 22–31 pt |
-| Subtítulos e destaques informativos | Garet Medium | 14–20 pt |
-| Explicações e exemplos | Garet Regular | 15–17 pt, entrelinha 21–24 pt |
-| Legendas e identificação | DM Sans | 9–12 pt |
-| Rodapé / numeração | DM Sans | 8–9 pt |
+| Capa — título principal | Times New Roman MT Condensed | 62–74 pt |
+| Títulos de página | Times New Roman MT Condensed | 36–44 pt |
+| Subtítulo expressivo | Balgin | 23–29 pt |
+| Intertítulo ou chamada | Balgin | 18–23 pt |
+| Corpo explicativo | DM Sans Regular | 16–17 pt, entrelinha 23–25 pt |
+| Exemplos e instruções | DM Sans Regular/Medium | 16–17 pt |
+| Etiquetas e número de página | DM Sans Medium | 10–12 pt |
+| Rodapé | DM Sans | 9–10 pt |
 
-Priorizar páginas de uma ideia, parágrafos curtos, bom contraste e tamanho de leitura adequado ao celular. Os tamanhos são referências e podem variar conforme a composição sem comprometer a legibilidade.
+## Na interface responsiva
 
-## Na interface da Escola da Casa
-
-- Títulos de aula em Times, aproximadamente 32–47 px, ajustados ao celular.
-- Textos, exemplos e atividades em Garet, aproximadamente 16–18 px.
-- Botões, navegação, etiquetas e controles em DM Sans, normalmente 12–15 px; áreas clicáveis de pelo menos 44 px quando aplicável.
-- A leitura continua dentro do site, sem alterar os módulos Praticar e Conferir.
+- Títulos de aula: Times New Roman MT Condensed, de 32 a 48 px.
+- Subtítulos e frases de apoio: Balgin, de 19 a 26 px.
+- Corpo de texto, questões e atividades: DM Sans, de 16 a 18 px, entrelinha próxima de 1,6.
+- Botões, menus, etiquetas e navegação: DM Sans, com áreas interativas confortáveis para celular.
 
 ## Identidade visual
 
-Papel com textura leve, fotografias reais da padaria, verde-oliva, marrom quente e mostarda. Evitar excesso de caixas e componentes de aplicativo dentro das páginas editoriais.
+Preservar as referências originais de Sorrir & Servir: fotografias reais da padaria, verde-oliva, marrom quente, mostarda e papel com textura. Evitar caixas genéricas dentro das páginas editoriais.
 
-## Instalação das fontes
+## Licenciamento e fontes de reserva
 
-Os nomes Times NR MT Pro Condensed e Garet foram identificados no PDF original da empresa, mas **os arquivos licenciados para uso na web e em novos PDFs ainda não foram fornecidos**. A página usa fontes substitutas legíveis quando elas não estão instaladas; o PDF refeito também usa substitutas métricas. Não afirmar que a renderização corresponde exatamente às fontes originais até haver instalação autorizada.
+**Os arquivos licenciados de Times New Roman MT Condensed e Balgin ainda não estão disponíveis no repositório.** Até a instalação autorizada:
 
-Os arquivos PDF e WebP de `materiais/arte-de-receber*` precisam ser regenerados juntos sempre que a fonte ou a diagramação do material mudar, pois as páginas são imagens.
+- Título: Times New Roman como reserva.
+- Subtítulo: Barlow Condensed como reserva de Balgin.
+- Corpo: DM Sans carregada por Google Fonts.
+
+Não publicar arquivos de fontes licenciadas em repositório público sem autorização. Não afirmar que as fontes reservadas reproduzem exatamente as originais.
+
+## Publicação dos materiais
+
+As oito páginas de A arte de receber são imagens WebP e o PDF correspondente contém tipografia incorporada na arte. O CSS atualizado **não modifica essas imagens**. Para refletir a combinação aprovada na revista, regenerar o PDF e os oito WebPs juntos com fontes autorizadas, ou informar claramente as substituições se não estiverem disponíveis.
+
+As etapas Praticar e Conferir, os checklists e o progresso do usuário permanecem separados dessa alteração visual.
